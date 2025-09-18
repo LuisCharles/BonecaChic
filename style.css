@@ -21,8 +21,6 @@ body {
     --bs-btn-hover-border-color: #d63384;
     --bs-btn-active-bg: #c12e77;
     --bs-btn-active-border-color: #c12e77;
-    /* Removido "color: var(--rosa-escuro) !important;" pois isso faria o texto do botão ser rosa escuro, 
-       mas geralmente botões primary têm texto branco. Se quiser manter rosa, adicione de volta. */
     color: var(--branco); /* Definindo a cor do texto do botão primary para branco */
 }
 
@@ -50,66 +48,89 @@ header.scrolled {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Adiciona sombra */
 }
 
+/* ---------------------------------------------------- */
+/* ALTERAÇÕES AQUI: Cor inicial dos links e logo */
+/* ---------------------------------------------------- */
+
 header .navbar-brand {
     font-weight: 700;
     font-size: 1.8rem;
-    color: var(--preto) !important;
-    transition: color 0.3s ease;
+    color: var(--branco) !important; /* Cor inicial branca */
+    transition: color 0.5s ease; /* Transição suave */
 }
 
-header .navbar-brand:hover {
-    color: var(--rosa-escuro) !important;
+/* Cor do logo e dos links (branco inicial) */
+.navbar-light .navbar-nav .nav-link {
+    color: var(--branco); /* Cor inicial branca */
+    font-weight: 600;
+    position: relative;
+    transition: color 0.5s ease; /* Transição suave */
 }
 
 /* Estilo para o logo da Fran */
 header .navbar-brand .logo {
-    height: 60px; /* Ajuste o tamanho conforme desejar */
+    height: 60px;
     width: auto;
-    border-radius: 50%; /* Para deixá-la redonda */
-    border: 2px solid var(--rosa-escuro); /* Borda para destaque */
+    border-radius: 50%;
+    border: 2px solid var(--branco); /* Borda branca inicial */
     padding: 2px;
-    object-fit: cover; /* Garante que a imagem se ajuste sem distorcer */
+    object-fit: cover;
+    transition: border-color 0.5s ease; /* Transição suave */
 }
 
-.navbar-light .navbar-nav .nav-link {
-    color: var(--preto);
-    font-weight: 600;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
+/* Hover continua sendo rosa */
+header .navbar-brand:hover,
 .navbar-light .navbar-nav .nav-link:hover {
-    color: var(--rosa-escuro);
+    color: var(--rosa-escuro) !important;
 }
 
+/* Efeito de sublinhado */
 .navbar-light .navbar-nav .nav-link::after {
     content: '';
     position: absolute;
     width: 0;
     height: 2px;
-    background: var(--rosa-escuro);
+    background: var(--branco); /* Sublinhado branco inicial */
     left: 0;
     bottom: -5px;
-    transition: width 0.3s ease;
+    transition: width 0.3s ease, background 0.5s ease;
 }
 
 .navbar-light .navbar-nav .nav-link:hover::after {
     width: 100%;
 }
 
+/* ---------------------------------------------------- */
+/* ALTERAÇÕES AQUI: Cor quando a classe 'scrolled' é adicionada */
+/* ---------------------------------------------------- */
+
+/* Quando o header for rolado, muda a cor dos elementos para preto */
+header.scrolled .navbar-brand,
+header.scrolled .navbar-nav .nav-link {
+    color: var(--preto) !important;
+}
+
+header.scrolled .navbar-brand .logo {
+    border-color: var(--rosa-escuro); /* Borda rosa escuro quando rolado */
+}
+
+header.scrolled .navbar-nav .nav-link::after {
+    background: var(--rosa-escuro); /* Sublinhado rosa escuro quando rolado */
+}
+
+/* FIM DAS ALTERAÇÕES */
+
 /* Hero - Carrossel */
 #hero {
-    /* Removido min-height e display flex aqui para permitir que o carrossel controle a altura */
     position: relative;
 }
 
-/* **Importante**: Ajuste para o carrossel pegar a tela toda */
 #heroCarousel .carousel-item {
-    height: 100vh; /* Ocupa 100% da altura da viewport */
+    height: 100vh;
 }
 
 #heroCarousel .carousel-item img {
-    height: 100vh; /* A imagem também ocupa 100% da altura da viewport */
+    height: 100vh;
     object-fit: cover;
     filter: brightness(0.6);
 }
@@ -143,7 +164,7 @@ header .navbar-brand .logo {
 }
 
 /* Seções e Footer para a animação */
-.animated-section { /* Nova classe para os elementos animados */
+.animated-section {
     opacity: 0;
     transform: translateY(50px);
     transition: all 1s ease;
@@ -159,7 +180,6 @@ section {
     padding: 100px 0;
 }
     
-
 section h2 {
     font-weight: 700;
     color: var(--preto);
