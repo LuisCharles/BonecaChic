@@ -3,7 +3,7 @@ body {
     scroll-behavior: smooth;
     line-height: 1.6;
     color: #333;
-    margin: 0; /* Garante que não haja margens padrão no body */
+    margin: 0;
 }
 
 :root {
@@ -21,76 +21,66 @@ body {
     --bs-btn-hover-border-color: #d63384;
     --bs-btn-active-bg: #c12e77;
     --bs-btn-active-border-color: #c12e77;
-    color: var(--branco); /* Definindo a cor do texto do botão primary para branco */
+    color: var(--branco);
 }
 
-/* Garante que o texto e ícones que usam .text-primary fiquem rosa */
 .text-primary {
     color: var(--rosa-escuro) !important;
 }
 
 /* Header */
 header {
-    background: transparent; /* Alterado para transparente */
-    box-shadow: none; /* Removido a sombra inicial */
+    background: transparent;
+    box-shadow: none;
     padding: 10px 0;
-    transition: background 0.5s ease, box-shadow 0.5s ease; /* Adicionada transição suave */
-    position: fixed; /* Fixa o cabeçalho no topo da página */
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+    position: fixed;
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 1000; /* Garante que o cabeçalho fique sobre os outros elementos */
+    z-index: 1000;
 }
 
-/* Nova classe para o cabeçalho quando a página for rolada */
 header.scrolled {
-    background: var(--branco); /* Fica branco */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Adiciona sombra */
+    background: var(--branco);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
-
-/* ---------------------------------------------------- */
-/* ALTERAÇÕES AQUI: Cor inicial dos links e logo */
-/* ---------------------------------------------------- */
 
 header .navbar-brand {
     font-weight: 700;
     font-size: 1.8rem;
-    color: var(--branco) !important; /* Cor inicial branca */
-    transition: color 0.5s ease; /* Transição suave */
+    color: var(--branco) !important;
+    transition: color 0.5s ease;
 }
 
-/* Cor do logo e dos links (branco inicial) */
 .navbar-light .navbar-nav .nav-link {
-    color: var(--branco); /* Cor inicial branca */
+    color: var(--branco);
     font-weight: 600;
     position: relative;
-    transition: color 0.5s ease; /* Transição suave */
+    transition: color 0.5s ease;
 }
 
-/* Estilo para o logo da Fran */
 header .navbar-brand .logo {
     height: 60px;
     width: auto;
     border-radius: 50%;
-    border: 2px solid var(--branco); /* Borda branca inicial */
+    border: 2px solid var(--branco);
     padding: 2px;
     object-fit: cover;
-    transition: border-color 0.5s ease; /* Transição suave */
+    transition: border-color 0.5s ease;
 }
 
-/* Hover continua sendo rosa */
 header .navbar-brand:hover,
 .navbar-light .navbar-nav .nav-link:hover {
     color: var(--rosa-escuro) !important;
 }
 
-/* Efeito de sublinhado */
 .navbar-light .navbar-nav .nav-link::after {
     content: '';
     position: absolute;
     width: 0;
     height: 2px;
-    background: var(--branco); /* Sublinhado branco inicial */
+    background: var(--branco);
     left: 0;
     bottom: -5px;
     transition: width 0.3s ease, background 0.5s ease;
@@ -100,25 +90,18 @@ header .navbar-brand:hover,
     width: 100%;
 }
 
-/* ---------------------------------------------------- */
-/* ALTERAÇÕES AQUI: Cor quando a classe 'scrolled' é adicionada */
-/* ---------------------------------------------------- */
-
-/* Quando o header for rolado, muda a cor dos elementos para preto */
 header.scrolled .navbar-brand,
 header.scrolled .navbar-nav .nav-link {
     color: var(--preto) !important;
 }
 
 header.scrolled .navbar-brand .logo {
-    border-color: var(--rosa-escuro); /* Borda rosa escuro quando rolado */
+    border-color: var(--rosa-escuro);
 }
 
 header.scrolled .navbar-nav .nav-link::after {
-    background: var(--rosa-escuro); /* Sublinhado rosa escuro quando rolado */
+    background: var(--rosa-escuro);
 }
-
-/* FIM DAS ALTERAÇÕES */
 
 /* Hero - Carrossel */
 #hero {
@@ -178,6 +161,7 @@ header.scrolled .navbar-nav .nav-link::after {
 /* Seções */
 section {
     padding: 100px 0;
+    position: relative;
 }
     
 section h2 {
@@ -226,10 +210,24 @@ section h2::after {
     background: var(--branco);
 }
 
+/* Animação para os ícones de serviço */
+.service-icon {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.service-icon.fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 #servicos .card {
     border: none;
     border-radius: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: all 0.5s ease;
     background: var(--cinza-claro);
     padding: 30px;
     min-height: 250px;
@@ -240,7 +238,7 @@ section h2::after {
 }
 
 #servicos .card:hover {
-    transform: translateY(-15px);
+    transform: rotateY(5deg) scale(1.03); 
     box-shadow: 0px 15px 30px rgba(0,0,0,0.1);
     background: var(--rosa-claro);
 }
@@ -255,11 +253,66 @@ section h2::after {
     color: #555;
 }
 
-/* Contato */
+/* Seção de Processo */
+#processo {
+    background: var(--rosa-claro);
+    position: relative;
+}
+
+#processo .process-step {
+    padding: 20px;
+    position: relative;
+}
+
+#processo .process-step h5 {
+    font-weight: 700;
+    color: var(--preto);
+    margin-top: 15px;
+}
+
+#processo .process-step i {
+    color: var(--rosa-escuro);
+}
+
+@media (min-width: 769px) {
+    #processo .process-step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -30px;
+        width: 60px;
+        height: 2px;
+        background: var(--preto);
+    }
+}
+
+/* Contato com Parallax */
 #contato {
     background: var(--preto);
     color: var(--branco);
     text-align: center;
+    overflow: hidden; /* Garante que nada saia do container */
+}
+
+/* Efeito Parallax */
+#contato .parallax-bg {
+    background-image: url('https://images.unsplash.com/photo-1549487593-1e56b3e83b4b'); /* Substitua pelo caminho da sua imagem */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.3; /* Deixa o fundo mais suave */
+}
+
+#contato .container {
+    position: relative;
+    z-index: 2; /* Garante que o conteúdo fique acima do fundo parallax */
 }
 
 #contato h2 {
@@ -299,6 +352,35 @@ footer {
     border-top: 1px solid rgba(255,255,255,0.1);
 }
 
+/* Botão "Voltar ao Topo" */
+#scrollToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: var(--rosa-escuro);
+    color: white;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#scrollToTopBtn:hover {
+    background-color: #d63384;
+    transform: scale(1.05);
+}
+
+#scrollToTopBtn .fas {
+    margin-right: 8px;
+}
+
+/* Media Query para telas menores */
 @media (max-width: 768px) {
     #heroCarousel .carousel-caption h1 {
         font-size: 2.5rem;
@@ -309,9 +391,18 @@ footer {
     section {
         padding: 60px 0;
     }
-    /* Para telas menores, ajusta a altura do carrossel para ser um pouco menor, se desejado */
     #heroCarousel .carousel-item,
     #heroCarousel .carousel-item img {
-        height: 80vh; /* Exemplo: 80% da altura da tela em dispositivos móveis */
+        height: 80vh;
+    }
+    #scrollToTopBtn {
+        padding: 15px;
+        border-radius: 50%;
+    }
+    #scrollToTopBtn .btn-text {
+        display: none;
+    }
+    #scrollToTopBtn .fas {
+        margin-right: 0;
     }
 }

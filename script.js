@@ -1,25 +1,31 @@
-// Animação simples ao rolar a página (fade-in)
 document.addEventListener("DOMContentLoaded", () => {
-    const elements = document.querySelectorAll(".animated-section");
-
-    const observer = new IntersectionObserver(entries => {
+    // Animação de fade-in para as seções ao rolar a página
+    const sections = document.querySelectorAll(".animated-section");
+    const sectionObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("fade-in");
+                sectionObserver.unobserve(entry.target);
             }
         });
     }, { threshold: 0.2 });
+    sections.forEach(el => sectionObserver.observe(el));
 
-    elements.forEach(el => observer.observe(el));
+    // Animação para os ícones de serviço
+    const serviceIcons = document.querySelectorAll(".service-icon");
+    const iconObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("fade-in-up");
+                iconObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    serviceIcons.forEach(el => iconObserver.observe(el));
 
-    // **********************************************
-    // NOVO CÓDIGO PARA O CABEÇALHO TRANSPARENTE
-    // **********************************************
+    // Cabeçalho transparente que muda de cor ao rolar
     const header = document.querySelector('header');
-    
-    // Adiciona o evento de scroll
     window.addEventListener('scroll', () => {
-        // Se a posição de scroll vertical for maior que 50px
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
@@ -27,4 +33,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Botão "Voltar ao Topo"
+    const mybutton = document.getElementById("scrollToTopBtn");
+    
+    // Mostra ou esconde o botão
+    window.onscroll = function() {
+      scrollFunction();
+    };
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    // Faz a rolagem suave ao clicar no botão
+    mybutton.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 });
